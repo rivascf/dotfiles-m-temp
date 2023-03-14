@@ -885,18 +885,10 @@
   885  gst
   886  echo "Installing configuring and adding plugins to vscode... Done!"
   887  source /home/frivas/dev/python/openai_t1/.venv/bin/activate
-  888  export OPENAI_APY_KEY=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
-  889  echo $OPENAI_API_KEY
-  890  export OPENAI_APY_KEY='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'
-  891  echo $OPENAI_API_KEY
-  892  echo $OPENAI_APY_KEY
   893  source /home/frivas/dev/python/openai_t1/.venv/bin/activate
   894  pip -V
   895  pip install openai
   896  source /home/frivas/dev/python/openai_t1/.venv/bin/activate
-  897  echo $OPENAI_APY_KEY
-  898  export OPENAI_API_KEY='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'
-  899  echo $OPENAI_API_KEY
   900  cd dev/python/
   901  ll
   902  rm -rf .vscode/
