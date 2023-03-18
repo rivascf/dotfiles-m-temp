@@ -1,0 +1,595 @@
+    1  sudo apt-get update -y
+    2  sudo apt update -y
+    3  sudo apt upgrade -y
+    4  echo "Instalando prerequisitos: Nerdfonts, lsd, git, curl"
+    5  sudo apt install curl git
+    6  echo "Descargar 'SourceCodePro (Sauce Code Pro Nerd Fonts)' de https://www.nerdfonts.com/font-downloads"
+    7  wget https://github.com/ryanoasis/nerd-fonts/releases/download/v2.3.3/SourceCodePro.zip -P ~/Downloads/
+    8  wget https://github.com/ryanoasis/nerd-fonts/releases/download/v2.3.3/RobotoMono.zip -P ~/Downloads/
+    9  wget https://github.com/ryanoasis/nerd-fonts/releases/download/v2.3.3/JetBrainsMono.zip -P ~/Downloads/
+   10  wget https://github.com/ryanoasis/nerd-fonts/releases/download/v2.3.3/Hack.zip -P ~/Downloads/
+   11  wget https://github.com/ryanoasis/nerd-fonts/releases/download/v2.3.3/Ubuntu.zip -P ~/Downloads/
+   12  ll ~/Downloads/
+   13  echo "Instalando Nerdfonts"
+   14  mkdir ~/.fonts
+   15  unzip ~/Downloads/Hack.zip -d ~/.fonts/Hack/
+   16  unzip ~/Downloads/JetBrainsMono.zip -d ~/.fonts/JetBrainsMono/
+   17  unzip ~/Downloads/RobotoMono.zip -d ~/.fonts/Roboto/
+   18  unzip ~/Downloads/SourceCodePro.zip -d ~/.fonts/SourceCodePro/
+   19  unzip ~/Downloads/Ubuntu.zip -d ~/.fonts/Ubuntu/
+   20  ll ~/Downloads/
+   21  ll ~/.fonts/
+   22  echo "Actualizando fuentes"
+   23  fc-cache -fv
+   24  fc-cache list
+   25  fc-list
+   26  fc-list -v Mono
+   27  fc-list -f Mono
+   28  echo "Actualizando fuentes... Done"
+   29  echo "Instalando Nerdfonts... Done!"
+   30  echo "Instalando 'lsd' de https://github.com/Peltoche/lsd/releases/download/0.23.1/lsd_0.23.1_amd64.deb"
+   31  echo "Instalando lsd... From source strategy... Instalando RUST compiler (rustup)"
+   32  curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
+   33  source "$HOME/.cargo/env"
+   34  rustup override set stable
+   35  rustup update stable
+   36  echo "Instalando lsd... From source strategy... Instalando RUST compiler (rustup)... Done!"
+   37  echo "Instalando lsd... From source strategy..."
+   38  cargo install --git https://github.com/Peltoche/lsd.git --branch master
+   39  echo "Instalando lsd... From source strategy... Prerequisites"
+   40  sudo apt install -y make build-essential libssl-dev zlib1g-dev libbz2-dev libreadline-dev libsqlite3-dev llvm libncurses5-dev libncursesw5-dev xz-utils tk-dev libffi-dev liblzma-dev python-openssl
+   41  sudo apt install -y make build-essential libssl-dev zlib1g-dev libbz2-dev libreadline-dev libsqlite3-dev llvm libncurses5-dev libncursesw5-dev xz-utils tk-dev libffi-dev liblzma-dev python3-openssl
+   42  cc -v
+   43  echo "Instalando lsd... From source strategy... Prerequisites... Done!"
+   44  cargo install --git https://github.com/Peltoche/lsd.git --branch master
+   45  ll ~/.config/
+   46  echo "Configurando lsd... "
+   47  mkdir ~/.config/lsd && cd ~/.config/lsd
+   48  mkdir themes
+   49  wget https://raw.githubusercontent.com/rivascf/dotfiles-m-temp/main/config/lsd/config.yaml
+   50  wget https://raw.githubusercontent.com/rivascf/dotfiles-m-temp/main/config/lsd/themes/default-theme.yaml -P ./themes/
+   51  wget https://raw.githubusercontent.com/rivascf/dotfiles-m-temp/main/config/lsd/themes/frivas-theme.yaml -P ./themes/
+   52  wget https://raw.githubusercontent.com/rivascf/dotfiles-m-temp/main/config/lsd/themes/terminal-colors.yaml -P ./themes/
+   53  ll
+   54  ll themes/
+   55  echo "Configurando lsd... Done!"
+   56  cd
+   57  echo "Probando lsd... "
+   58  lsd -la
+   59  lsd --tree ~/Downloads/
+   60  lsd --tree ~/.config/lsd/
+   61  echo "Probando lsd... Done!"
+   62  echo "Instalando lsd... From source strategy... Done!"
+   63  echo "Customizing terminal colors (manual)"
+   64  echo "Customizing terminal colors (manual)... Nord and Nord (Black BG) Themes... Done!"
+   65  echo "Configurando git"
+   66  ll
+   67  wget -O .gitconfig https://raw.githubusercontent.com/rivascf/dotfiles-m-temp/main/gitconfig
+   68  ll
+   69  git config --global -e
+   70  git config --global -l
+   71  echo "Configurando git... Done!"
+   72  echo "Adding 'lsd' to bashrc... "
+   73  nano .bashrc 
+   74  source ~/.bashrc 
+   75  ll
+   76  lt ~/Downloads/
+   77  lt -a ~/Downloads/
+   78  lt -l ~/Downloads/
+   79  echo "Adding 'lsd' to bashrc... Done!"
+   80  echo "Instalando pyenv, from blog post 'https://k0nze.dev/posts/install-pyenv-venv-vscode/'"
+   81  apt search openssl | grep python
+   82  git clone https://github.com/pyenv/pyenv.git ~/.pyenv
+   83  ll
+   84  echo "Optionally, try to compile a dynamic Bash extension to speed up Pyenv. Don't worry if it fails; Pyenv will still work normally:"
+   85  cd ~/.pyenv && src/configure && make -C src
+   86  ll
+   87  git status
+   88  cd ..
+   89  echo 'export PYENV_ROOT="$HOME/.pyenv"' >> ~/.bashrc
+   90  echo 'command -v pyenv >/dev/null || export PATH="$PYENV_ROOT/bin:$PATH"' >> ~/.bashrc
+   91  echo 'eval "$(pyenv init -)"' >> ~/.bashrc
+   92  echo 'export PYENV_ROOT="$HOME/.pyenv"' >> ~/.profile
+   93  echo 'command -v pyenv >/dev/null || export PATH="$PYENV_ROOT/bin:$PATH"' >> ~/.profile
+   94  echo 'eval "$(pyenv init -)"' >> ~/.profile
+   95  echo $BASH_ENV
+   96  exec "$SHELL"
+   97  pyenv -V
+   98  source ~/.bashrc 
+   99  pyenv -V
+  100  nano .bashrc 
+  101  source ~/.bashrc 
+  102  echo $BASH_ENV
+  103  pyenv -V
+  104  pyenv --version
+  105  pyenv list
+  106  pyenv versions
+  107  python -#
+  108  python -V
+  109  python -v
+  110  python3 -v
+  111  python3 -V
+  112  pyenv install -l
+  113  echo "Probando pyenv e instalando otras versiones de Python"
+  114  pyenv install 3.10.10
+  115  pyenv install 3.11.2
+  116  pyenv install 2.7.18
+  117  pyenv versions
+  118  mkdir -p ~/dev/python
+  119  cd ~/dev/python/
+  120  mkdir python27_test
+  121  cd python27_test/
+  122  python -V
+  123  python3 -V
+  124  pyenv local 2.7.18
+  125  python -V
+  126  pyenv init 
+  127  ll
+  128  echo $PYENV_ROOT
+  129  cd ~/dev/python/python27_test/
+  130  pyenv init 
+  131  nano ~/.bashrc 
+  132  cd ~/dev/python/python27_test/
+  133  ll
+  134  python -v
+  135  echo $PYENV_ROOT
+  136  pyenv init
+  137  cd ..
+  138  cd 
+  139  ll
+  140  nano .profile 
+  141  cd ~/dev/python/python27_test/
+  142  python -m venv .venv
+  143  python -
+  144  python -m venv .venv
+  145  pyenv -h
+  146  python -h
+  147  python -m
+  148  python -m venv .venv
+  149  python -m virtualenv .venv
+  150  echo "Mmmm... python2 ver 'pip install virtualenv' solution from 'https://bobbyhadz.com/blog/python-no-module-named-virtualenv'"
+  151  cd ..
+  152  python -V
+  153  mkdir python311_test
+  154  cd python311_test/
+  155  pyenv local 3.11.2
+  156  python -V
+  157  python -m venv .venv
+  158  rm .python-version 
+  159  python -V
+  160  source .venv/bin/activate
+  161  python -V
+  162  deactivate
+  163  cd 
+  164  echo "Probando pyenv e instalando otras versiones de Python... Done!"
+  165  echo "Adding bash aliases..."
+  166  ll
+  167  wget .bash_aliases https://raw.githubusercontent.com/rivascf/dotfiles-m-temp/main/bash_aliases
+  168  ll
+  169  mv bash_aliases .bash_aliases
+  170  ll
+  171  source ~/.bashrc 
+  172  g status
+  173  trmrst 
+  174  echo $SHELL
+  175  gst
+  176  echo "Adding bash aliases... Done!"
+  177  echo "Instalando Alacritty..."~
+  178  echo "Instalando Alacritty... Prerequisitos... "
+  179  git clone https://github.com/alacritty/alacritty.git
+  180  cd alacritty/
+  181  echo "Instalando Alacritty... Prerequisitos... Dependences (if need it)..."
+  182  sudo apt-get install cmake pkg-config libfreetype6-dev libfontconfig1-dev libxcb-xfixes0-dev libxkbcommon-dev
+  183  echo "Instalando Alacritty... Prerequisitos... Dependences... Done!"
+  184  echo "Instalando Alacritty... Building..."
+  185  cargo build --release
+  186  echo "Instalando Alacritty... Post build..."
+  187  infocmp alacritty
+  188  sudo tic -xe alacritty,alacritty-direct extra/alacritty.info
+  189  infocmp alacritty
+  190  echo "Instalando Alacritty... Post build... Done!"
+  191  echo "Instalando Alacritty... Desktop Entry..."
+  192  sudo cp target/release/alacritty /usr/local/bin # or anywhere else in $PATH
+  193  ll extra/logo/~
+  194  ll extra/logo/
+  195  sudo cp extra/logo/alacritty-term.svg /usr/share/pixmaps/Alacritty.svg
+  196  sudo desktop-file-install extra/linux/Alacritty.desktop
+  197  sudo update-desktop-database
+  198  echo "Instalando Alacritty... Desktop Entry... Done!"
+  199  echo "Instalando Alacritty... Manual entry..."
+  200  sudo mkdir -p /usr/local/share/man/man1
+  201  gzip -c extra/alacritty.man | sudo tee /usr/local/share/man/man1/alacritty.1.gz > /dev/null
+  202  gzip -c extra/alacritty-msg.man | sudo tee /usr/local/share/man/man1/alacritty-msg.1.gz > /dev/null
+  203  echo "Instalando Alacritty... Manual entry... Done!"
+  204  echo "Instalando Alacritty... Shell completions..."
+  205  mkdir -p ~/.bash_completion.d
+  206  cp extra/completions/alacritty.bash ~/.bash_completion.d/alacritty
+  207  echo "source ~/.bash_completion.d/alacritty.bash" >> ~/.bashrc
+  208  echo "Instalando Alacritty... Shell completions... Done!"
+  209  echo "Instalando Alacritty... Verifying installation..."
+  210  nano ~/.bashrc
+  211  trmrst 
+  212  ll
+  213  echo "Instalando Alacritty... Shell completions... Done!"
+  214  echo "Instalando Alacritty... Verifying installation... Done!"
+  215  alacritty
+  216  cd ~/.config/
+  217  mkdir alacritty && cd alacritty
+  218  wget https://raw.githubusercontent.com/rivascf/dotfiles-m-temp/main/config/alacritty/alacritty.yml
+  219  echo "Configurating Alacritty... Testing..."
+  220  echo "Configurating Alacritty... Testing... Done!"
+  221  echo "Copying scripts and PS! generation..."
+  222  cd
+  223  mkdir -p ~/.config/gitbash
+  224  wget https://raw.githubusercontent.com/rivascf/dotfiles-m-temp/main/config/gitbash/git-completition.bash -P ~/.config/gitbash/
+  225  wget https://raw.githubusercontent.com/rivascf/dotfiles-m-temp/main/config/gitbash/git-prompt.sh -P ~/.config/gitbash/
+  226  lt ~/.config/gitbash/
+  227  mkdir -p ~/.config/rosmgmt
+  228  wget https://raw.githubusercontent.com/rivascf/dotfiles-m-temp/main/config/rosmgmt/ros_mgmt.sh -P ~/.config/rosmgmt/
+  229  wget https://raw.githubusercontent.com/rivascf/dotfiles-m-temp/main/config/rosmgmt/ros2_galactic_conf.bash -P ~/.config/rosmgmt/
+  230  wget https://raw.githubusercontent.com/rivascf/dotfiles-m-temp/main/config/rosmgmt/ros2_humble_conf.bash -P ~/.config/rosmgmt/
+  231  wget https://raw.githubusercontent.com/rivascf/dotfiles-m-temp/main/config/rosmgmt/ros_noetic_conf.bash -P ~/.config/rosmgmt/
+  232  lt ~/.config/rosmgmt/
+  233  mkdir -p ~/.config/utilities
+  234  wget https://raw.githubusercontent.com/rivascf/dotfiles-m-temp/main/config/utilities/venv_prompt.sh -P ~/.config/utilities/
+  235  ll ~/.config/utilities/
+  236  ll ~/.config/
+  237  nano .bashrc
+  238  trmrst 
+  239  cd dev/python/python311_test/
+  240  cat ~/.bash_aliases 
+  241  startvenv 
+  242  deactivate
+  243  cd
+  244  echo "Copying scripts and PS! generation... Done!"
+  245  echo "Installing Node.js and npm using NVM (Node Version Manager)..."
+  246  echo "extracted from: https://linuxize.com/post/how-to-install-node-js-on-ubuntu-22-04/#installing-nodejs-and-npm-using-nvm, https://github.com/nvm-sh/nvm#installing-and-updating"
+  247  wget -qO- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.3/install.sh | bash
+  248  echo "Installing Node.js and npm using NVM (Node Version Manager)... Adding to bashrc"
+  249  nano ~/.bashrc 
+  250  trmrst 
+  251  echo "Installing Node.js and npm using NVM (Node Version Manager)... Adding to bashrc... Done!"
+  252  echo "Installing Node.js and npm using NVM (Node Version Manager)... Testing..."
+  253  nvm -V
+  254  nvm list-remote
+  255  nvm list --lts
+  256  nvm install --lts
+  257  node -v
+  258  nvm install v16.19.1
+  259  nvm list --lts
+  260  nvm list 
+  261  nvm -h
+  262  nvm current
+  263  nvm list 
+  264  nvm use v18.15.0
+  265  nvm list 
+  266  pip -V
+  267  echo "Installing Node.js and npm using NVM (Node Version Manager)... Testing... Done!"
+  268  cho "Installing Node.js and npm using NVM (Node Version Manager)... Done!"
+  269  echo "Installing Node.js and npm using NVM (Node Version Manager)... Done!"
+  270  echo "Installing Nvim (Neovim)... Methode 1 from latest release deb package."
+  271  wget https://github.com/neovim/neovim/releases/download/stable/nvim-linux64.deb -P ~/Downloads/
+  272  cd ~/Downloads/
+  273  sudo apt install ./nvim-linux64.deb 
+  274  sudo apt autoremove
+  275  echo "Installing Nvim (Neovim)... Methode 1 from deb packages... CheckingHealth and installing extras"
+  276  nvim
+  277  sudo apt-get install software-properties-common python-software-properties
+  278  sudo apt-get install python-dev python3-dev python3-pip
+  279  sudo apt-get install python3-dev python3-dev python3-pip
+  280  pip3 -V
+  281  pip3 list pynvim
+  282  pip3 install pynvim
+  283  nvim
+  284  npm install -g neovim
+  285  npm install -g npm@9.6.2
+  286  nvim
+  287  vim
+  288  mkdir -p ~/.config/nvim
+  289  wget https://raw.githubusercontent.com/rivascf/dotfiles-m-temp/main/config/nvim/init.lua -P ~/.config/nvim/
+  290  nvim
+  291  echo "Installing GO (just for fun)..."
+  292  wget https://go.dev/dl/go1.20.2.linux-amd64.tar.gz -P ~/Downloads/
+  293  curl -sL https://golang.org/dl/ | grep -A 5 -w "go1.20.2.linux-amd64.tar.gz"
+  294  echo "4eaea32f59cde4dc635fbc42161031d13e1c780b87097f4b4234cfce671f1768 *go1.20.2.linux-amd64.tar.gz" | shasum -a 256 --check
+  295  tar -xf go1.20.2.linux-amd64.tar.gz 
+  296  ll
+  297  sudo chown -R root:root ./go
+  298  ll
+  299  sudo mv -v go /usr/local
+  300  ll
+  301  cd
+  302  vim .bashrc
+  303  trmrst 
+  304  go version
+  305  echo $GOPATH
+  306  echo "Installing GO (just for fun)... Done!"
+  307  nvim ~/.config/nvim/init.lua 
+  308  echo "Installing Nvim (Neovim)... Methode 1 from deb packages... CheckingHealth and installing extras... Done!"
+  309  echo "Installing Nvim (Neovim)... Methode 1 from deb packages... Basic configuration... Done!"
+  310  echo "Installing Nvim (Neovim)... Methode 1 from deb packages... Done!"
+  311  nvim ~/.config/nvim/init.lua 
+  312  echo "`tree-sitter` executable not found - error"
+  313  echo "'tree-sitter' executable not found - error"
+  314  sudo npm install -g tree-sitter
+  315  npm
+  316  npm install -g tree-sitter
+  317  nvim ~/.config/nvim/init.lua 
+  318  npm install -g
+  319  npm install -h
+  320  npm install -g tree-sitter
+  321  echo "Installing ripgrep for 'Treesitter'"
+  322  cd ~/Downloads/
+  323  git clone https://github.com/BurntSushi/ripgrep
+  324  cd ripgrep/
+  325  cargo build --release
+  326  ./target/release/rg --version 0.1.3
+  327  rg
+  328  ./target/release/rg --version
+  329  rg
+  330  cargo install --release
+  331  cargo install --list
+  332  echo "Installing ripgrep for 'Treesitter'... Failed"
+  333  cd ..
+  334  rm -rf ripgrep/
+  335  echo "Installing ripgrep for 'Treesitter'... Methode 2, from https://lindevs.com/install-ripgrep-on-ubuntu"
+  336  RIPGREP_VERSION=$(curl -s "https://api.github.com/repos/BurntSushi/ripgrep/releases/latest" | grep -Po '"tag_name": "\K[0-9.]+')
+  337  echo $RIPGREP_VERSION
+  338  curl -Lo ripgrep.deb "https://github.com/BurntSushi/ripgrep/releases/latest/download/ripgrep_${RIPGREP_VERSION}_amd64.deb"
+  339  sudo apt install -y ./ripgrep.deb
+  340  rg --version
+  341  echo "Installing ripgrep for 'Treesitter'... Methode 2, testing..."
+  342  sudo rg localhost /etc
+  343  echo "Installing ripgrep for 'Treesitter'... Methode 2, testing... Ok!"
+  344  echo "Installing ripgrep for 'Treesitter'... Done!"
+  345  cd
+  346  nvim ~/.config/nvim/init.lua 
+  347  echo "For telescope warning 'fd: no installed...'"
+  348  sudo apt install fd-find
+  349  fd -V
+  350  ln -s $(which fdfind) ~/.local/bin/fd
+  351  fd --hidden sample
+  352  ln -s $(which fd-find) ~/.local/bin/fd
+  353  fd-find --hidden sample
+  354  cargo install tree-sitter
+  355  ln -s $(which fdfind) ~/.local/bin/fd
+  356  echo $PATH
+  357  lt ~/.local/bin/
+  358  lt ~/.local/
+  359  ll ~/.local/
+  360  fdfind -V
+  361  ln -s $(which fdfind)
+  362  echo $(which fdfind)
+  363  ln -s $(which fdfind) ~/.local/bin/fd
+  364  mkdir -p /home/ros2user/.local/bin/
+  365  ln -s $(which fdfind) ~/.local/bin/fd
+  366  fd -V
+  367  fd -v
+  368  trmrst 
+  369  fd -v
+  370  fd -V
+  371  fd app
+  372  fd --hidden sample
+  373  echo "For telescope warning 'fd: no installed...' done! (From 'https://github.com/sharkdp/fd')"
+  374  nvim ~/.config/nvim/init.lua 
+  375  yarn
+  376  echo "Installing yarn..."
+  377  sudo curl --compressed -o- -L https://yarnpkg.com/install.sh | bash
+  378  vim .bashrc 
+  379  trmrst 
+  380  ros2 run demo_nodes_py listener
+  381  ros2 run demo_nodes_cpp talker
+  382  yarn -V
+  383  echo "Installing yarn... Done!"
+  384  gcc -dumpmachine
+  385  npm install -g tree-sitter-cli
+  386  nvim ~/.config/nvim/init.lua 
+  387  sudo apt-get update
+  388  sudo apt update
+  389  sudo apt upgrade
+  390  sudo apt install tmux
+  391  tmux
+  392  echo "Installing TMux... Done!"
+  393  yarn --version
+  394  echo "Installing ROS" Humble... "
+  395  echo "Installing ROS Humble... "
+  396  locale
+  397  sudo apt install software-properties-common
+  398  sudo add-apt-repository universe
+  399  sudo apt update
+  400  sudo curl -sSL https://raw.githubusercontent.com/ros/rosdistro/master/ros.key -o /usr/share/keyrings/ros-archive-keyring.gpg
+  401  sudo apt upgrade
+  402  echo "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/ros-archive-keyring.gpg] http://packages.ros.org/ros2/ubuntu $(. /etc/os-release && echo $UBUNTU_CODENAME) main" | sudo tee /etc/apt/sources.list.d/ros2.list > /dev/null
+  403  sudo apt update
+  404  sudo apt upgrade
+  405  sudo apt install ros-humble-desktop
+  406  sudo apt install ros-dev-tools
+  407  source /opt/ros/humble/setup.bash
+  408  tmux
+  409  vim ~/.config/rosmgmt/ros2_humble_conf.bash 
+  410  echo "Installing ROS Humble... Done!"
+  411  echo "Installing Gazebo Garden... "
+  412  sudo apt-get update
+  413  sudo apt-get install lsb-release wget gnupg
+  414  sudo wget https://packages.osrfoundation.org/gazebo.gpg -O /usr/share/keyrings/pkgs-osrf-archive-keyring.gpg
+  415  echo "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/pkgs-osrf-archive-keyring.gpg] http://packages.osrfoundation.org/gazebo/ubuntu-stable $(lsb_release -cs) main" | sudo tee /etc/apt/sources.list.d/gazebo-stable.list > /dev/null
+  416  sudo apt-get update
+  417  sudo apt-get install gz-garden
+  418  gz sim shapes.sdf -v 4
+  419  ign gazebo -v 4 -r visualize_lidar.sdf
+  420  gazebo -v 4 -r visualize_lidar.sdf
+  421  gz -v 4 -r visualize_lidar.sdf
+  422  gz sim shapes.sdf -v 4
+  423  gz sim shapes.sdf
+  424  echo "Installing Gazebo Garden... Evaluate!"
+  425  echo "Installing Gazebo Garden... Dont work... Rolling Back..."
+  426  sudo apt remove gz-garden && sudo apt autoremove
+  427  sudo apt update
+  428  sudo apt upgrade
+  429  ll /usr/share/fonts/truetype/lato
+  430  sudo rm -rf /usr/share/fonts/truetype/lato
+  431  ll /usr/share/fonts/truetype/lato
+  432  ll /usr/share/fonts/truetype/
+  433  ll /etc/apt/sources.list.d/
+  434  cat /etc/apt/sources.list.d/gazebo-stable.list 
+  435  cat /etc/apt/sources.list.d/ros2.list 
+  436  sudo rm /etc/apt/sources.list.d/gazebo-stable.list 
+  437  ll /etc/apt/sources.list.d/
+  438  sudo apt-get update
+  439  sudo apt update
+  440  sudo apt upgrade
+  441  apt search ros2 | grep humble | grep gazebo
+  442  apt search ros | grep humble | grep gazebo
+  443  apt search ros | grep humble | grep gz
+  444  sudo apt-get update
+  445  sudo apt update
+  446  sudo apt upgrade
+  447  sudo apt install ros-humble-ros-gz
+  448  sudo apt install libignition-math6-dev ros-humble-ros-gz
+  449  sudo apt install libignition-math6-dev
+  450  sudo apt install libignition-math6-eigen3-dev
+  451  sudo apt-get install -f
+  452  sudo dpkg --configure -a
+  453  sudo apt-get install -f
+  454  dpkg --get-selections | grep hold
+  455  sudo aptitude install libignition-math6-dev
+  456  aptitude
+  457  sudo apt install aptitude
+  458  sudo aptitude install libignition-math6-dev
+  459  sudo apt install ros-humble-ros-
+  460  apt search ros | grep humble | grep simulation
+  461  sudo apt install ros-humble-simulation
+  462  sudo apt-get update
+  463  sudo aptitude install libignition-math6-dev=6.12.0-3~jammy
+  464  sudo apt install ros-humble-ros-gz
+  465  sudo aptitude install libignition-math6-dev=6.12.0-3~jammy
+  466  sudo shutdown -r now
+  467  source /opt/ros/humble/setup.bash
+  468  ros2 node list
+  469  history | grep humble | grep desktop
+  470  sudo apt install ros-humble-desktop
+  471  apt search ros | grep humble | grep gazebo
+  472  sudo apt install ros-humble-gazebo-ros-pkgs
+  473  gazebo /usr/share/gazebo-11/worlds/seesaw.world 
+  474  echo $ROS_DISTRO
+  475  source /opt/ros/humble/setup.bash
+  476  echo $ROS_DISTRO
+  477  sudo apt-get install ros-$ROS_DISTRO-webots-ros2
+  478  export WEBOTS_HOME=/usr/local/webots
+  479  ros2 launch webots_ros2_epuck robot_launch.py
+  480  ll /usr/local/
+  481  find webots
+  482  ll
+  483  lt .ros
+  484  webots
+  485  wget https://github.com/cyberbotics/webots/releases/download/R2023a/webots_2023a_amd64.deb -P ~/Downloads/
+  486  history | grep install | grep deb
+  487  sudo apt install ~/Downloads/webots_2023a_amd64.deb 
+  488  ll /usr/local/
+  489  ros2 launch webots_ros2_epuck robot_launch.py
+  490  ros2 node list
+  491  vim ~/.config/rosmgmt/ros2_humble_conf.bash 
+  492  tmux
+  493  cat ~/.config/rosmgmt/ros2_humble_conf.bash 
+  494  echo $WEBOTS_HOME
+  495  source install/local_setup.bash 
+  496  ros2 launch my_package robot_launch
+  497  ros2 launch my_package robot_launch.py
+  498  ll
+  499  mkdir ros2dev
+  500  rm ros2dev/
+  501  mkdir -p ~/ros2dev/ros2_ws/src
+  502  cd ~/ros2dev/ros2_ws/src/
+  503  source ~/.config/rosmgmt/ros2_humble_conf.bash 
+  504  ros2 pkg create --build-type ament_python --node-name my_robot_driver my_package --dependencies rclpy geometry_msgs webots_ros2_driver
+  505  cd my_package/
+  506  ll
+  507  mkdir launch
+  508  mkdir worlds
+  509  cd ..
+  510  lt my_package/
+  511  wget https://docs.ros.org/en/humble/_downloads/c0d343388f672b7ea879394d1f179ca1/my_world.wbt -P ./my_package/worlds/
+  512  cd my_package/
+  513  vim my_package/my_robot_driver.py 
+  514  ll
+  515  cd ..
+  516  colcon build
+  517  ll
+  518  tmux
+  519  cd ~/ros2dev/ros2_ws/src/
+  520  cd
+  521  echo "Installing Turtlebot3..."
+  522  apt search ros | grep humble | grep gazebo
+  523  sudo apt install ros-humble-gazebo-*
+  524  source ~/.config/rosmgmt/ros2_humble_conf.bash 
+  525  source /opt/ros/humble/setup.bash 
+  526  apt search ros | grep humble | grep cartographer
+  527  sudo apt install ros-humble-cartographer
+  528  sudo apt install ros-humble-cartographer-ros
+  529  mkdir -p ~/ros2dev/turtlebot3_ws/src
+  530  cd ~/ros2dev/turtlebot3_ws/src
+  531  git clone -b humble-devel https://github.com/ROBOTIS-GIT/DynamixelSDK.git
+  532  git clone -b humble-devel https://github.com/ROBOTIS-GIT/turtlebot3_msgs.git
+  533  git clone -b humble-devel https://github.com/ROBOTIS-GIT/turtlebot3.git
+  534  cd ..
+  535  colcon build --symlink-install
+  536  source ~/ros2dev/turtlebot3_ws/install/setup.bash
+  537  vim ~/.config/rosmgmt/ros2_humble_conf.bash 
+  538  source  ~/.config/rosmgmt/ros2_humble_conf.bash 
+  539  echo $TURTLEBOT3_MODEL
+  540  cd src/
+  541  ll
+  542  git clone -b foxy-devel https://github.com/ROBOTIS-GIT/turtlebot3_simulations.git
+  543  ll
+  544  cd .. && colcon build --symlink-install
+  545  source  ~/.config/rosmgmt/ros2_humble_conf.bash 
+  546  cd
+  547  ros2 launch turtlebot3_gazebo empty_world.launch.py
+  548  ros2 pkg list | turtlebot
+  549  ros2 pkg list | grep turtlebot
+  550  source ~/.config/rosmgmt/ros2_humble_conf.bash 
+  551  vim ~/.config/rosmgmt/ros2_humble_conf.bash 
+  552  cd ~/ros2dev/turtlebot3_ws/
+  553  ll
+  554  rm -rf build/ log/ install/
+  555  ll
+  556  colcon build --symlink-install
+  557  rm -rf build/ log/ install/
+  558  gazebo
+  559  ros2 run turtlebot3_teleop teleop_keyboard
+  560  ros2 launch turtlebot3_gazebo empty_world.launch.py
+  561  export TURTLEBOT3_MODEL=burger
+  562  ros2 launch turtlebot3_gazebo empty_world.launch.py
+  563  cd ~/ros2dev/turtlebot3_ws/
+  564  source /opt/ros/humble/setup.bash 
+  565  colcon build --symlink-install
+  566  cd src/
+  567  ll
+  568  rm -rf turtlebot3_simulations/
+  569  git clone -b humble-devel https://github.com/ROBOTIS-GIT/turtlebot3_simulations.git
+  570  cd .. && colcon build --symlink-install
+  571  cd ..
+  572  source ~/.config/rosmgmt/ros2_humble_conf.bash 
+  573  tmux
+  574  echo "Installing Turtlebot3... Done!"
+  575  export TURTLEBOT3_MODEL=waffle
+  576  ros2 launch turtlebot3_gazebo turtlebot3_world.launch.py
+  577  export TURTLEBOT3_MODEL=waffle_pi
+  578  ros2 launch turtlebot3_gazebo turtlebot3_house.launch.py
+  579  echo "Installing Turtlebot3... Testing... Done!"
+  580  cd Downloads/
+  581  ll
+  582  echo "Cleaning downloaded files..."
+  583  rm *.deb
+  584  rm *.zip
+  585  ll
+  586  rm *.gz
+  587  rm -rf firefox.tmp/
+  588  ll
+  589  mv *.jpg ~/Pictures/
+  590  ll
+  591  cd ../Documents/
+  592  ll
+  593  g clone https://github.com/rivascf/dotfiles-m-temp.git
+  594  ll dotfiles-m-temp/
+  595  history >> dotfiles-m-temp/humble-vm-history-raw-170323
