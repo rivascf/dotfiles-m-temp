@@ -739,34 +739,54 @@
   739  code .
   740  sudo apt-get update -y && sudo apt update -y
   741  sudo apt upgrade -y
-  742  ll
-  743  npm -V
-  744  npm update -q
-  745  npm update -a
-  746  npm -l
-  747  npm whoami
-  748  npm adduser ros2user
+  742  vim ~/.config/alacritty/alacritty.yml 
+  743  ll
+  744  ll
+  745  npm -V
+  746  npm update -q
+  747  npm update -a
+  748  npm -l
   749  npm whoami
-  750  vim ~/.config/nvim/init.lua 
-  751  wget https://julialang-s3.julialang.org/bin/linux/x64/1.8/julia-1.8.5-linux-x86_64.tar.gz -P ~/Downloads/
-  752  cd Downloads/
-  753  ll
-  754  tar -xvzf julia-1.8.5-linux-x86_64.tar.gz
+  750  npm adduser ros2user
+  751  npm whoami
+  752  vim ~/.config/nvim/init.lua 
+  753  wget https://julialang-s3.julialang.org/bin/linux/x64/1.8/julia-1.8.5-linux-x86_64.tar.gz -P ~/Downloads/
+  754  cd Downloads/
   755  ll
-  756  sudo cp -r julia-1.8.5 /opt/
-  757  sudo ln -s /opt/julia-1.8.5/bin/julia /usr/local/bin/julia
-  758  ll /usr/local/bin/
-  759  ll
-  760  julia
-  761  rm -rf julia-1.8.5
-  762  ll
-  763  rm code_1.76.2-1678817801_amd64.deb julia-1.8.5-linux-x86_64.tar.gz 
+  756  tar -xvzf julia-1.8.5-linux-x86_64.tar.gz
+  757  ll
+  758  sudo cp -r julia-1.8.5 /opt/
+  759  sudo ln -s /opt/julia-1.8.5/bin/julia /usr/local/bin/julia
+  760  ll /usr/local/bin/
+  761  ll
+  762  julia
+  763  rm -rf julia-1.8.5
   764  ll
-  765  echo "Installing Julia from 'https://ferrolho.github.io/blog/2019-01-26/how-to-install-julia-on-ubuntu' (just for fun)... Done!"
-  766  vim ~/.config/nvim/init.lua 
-  767  ll
-  768  rm BR2_Chapters_PDF.zip 
+  765  rm code_1.76.2-1678817801_amd64.deb julia-1.8.5-linux-x86_64.tar.gz 
+  766  ll
+  767  echo "Installing Julia from 'https://ferrolho.github.io/blog/2019-01-26/how-to-install-julia-on-ubuntu' (just for fun)... Done!"
+  768  vim ~/.config/nvim/init.lua 
   769  ll
-  770  cd ~/Documents/dotfiles-m-temp/
+  770  rm BR2_Chapters_PDF.zip 
   771  ll
-  772  history >> humble-vm-history-raw-230323
+  772  cd ~/Documents/dotfiles-m-temp/
+  773  ll
+  774  history >> humble-vm-history-raw-230323
+  775  gst
+  776  g add .
+  777  g commit -m "Added humble-vm-history-raw-230323, vm history file"
+  778  g push -u origin main 
+  779  cd
+  780  history | tail -10
+  781  ll -l
+  782  sudo mv ~/fd  /usr/local/bin/
+  783  sudo mv ~/fdfind  /usr/local/bin/
+  784  ls /usr/local/bin/
+  785  ll /usr/local/bin/
+  786  fd -V
+  787  fdfind -V
+  788  cd ~/Documents/dotfiles-m-temp/
+  789  history >> humble-vm-history-raw-230323 
+  790  rm humble-vm-history-raw-230323 
+  791  ll
+  792  history >> humble-vm-history-raw-230323 
